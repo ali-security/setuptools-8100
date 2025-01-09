@@ -116,7 +116,7 @@ in OrderedSet).
 To use type hinting features install `ordered-set-stubs` package from
 [PyPI](https://pypi.org/project/ordered-set-stubs/):
 
-    $ pip install ordered-set-stubs
+    $ pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' ordered-set-stubs
 
 
 ## Authors

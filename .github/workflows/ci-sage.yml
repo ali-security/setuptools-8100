@@ -52,7 +52,7 @@ env:
 jobs:
 
   dist:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out ${{ env.SPKG }}
         uses: actions/checkout@v2
@@ -62,7 +62,7 @@ jobs:
         run: |
           sudo DEBIAN_FRONTEND=noninteractive apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install $DIST_PREREQ
-          python3 -m pip install build
+          python3 -m pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' build
       - name: Run make dist, prepare upstream artifact
         run: |
           (cd build/pkgs/${{ env.SPKG }}/src && python3 -m build --sdist) \

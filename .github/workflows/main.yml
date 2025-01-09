@@ -56,20 +56,20 @@ jobs:
         dev:
         - -dev
         platform:
-        - ubuntu-latest
+        - ubuntu-22.04
         - macos-latest
-        - windows-latest
+        - windows-2022
         include:
         - python: "3.8"
-          platform: ubuntu-latest
+          platform: ubuntu-22.04
         - python: "3.9"
-          platform: ubuntu-latest
+          platform: ubuntu-22.04
         - python: "3.10"
-          platform: ubuntu-latest
+          platform: ubuntu-22.04
         - python: pypy3.9
-          platform: ubuntu-latest
+          platform: ubuntu-22.04
           distutils: stdlib
-        - platform: ubuntu-latest
+        - platform: ubuntu-22.04
           python: "3.10"
           distutils: stdlib
     runs-on: ${{ matrix.platform }}
@@ -81,7 +81,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Setup Python
         id: python-install
-        uses: actions/setup-python@v4
+        uses: MatteoH2O1999/setup-python@v4
         with:
           python-version: ${{ matrix.python }}${{ matrix.dev }}
       - uses: actions/cache@v3
@@ -97,7 +97,7 @@ jobs:
         run: python -m downloads.preload setupcfg_examples.txt
       - name: Install tox
         run: |
-          python -m pip install tox
+          python -m pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' tox
       - name: Run tests
         run: tox
       - name: Create coverage report
@@ -115,16 +115,16 @@ jobs:
             Py-${{ steps.python-install.outputs.python-version }}
 
   docs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       TOXENV: docs
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: MatteoH2O1999/setup-python@v4
       - name: Install tox
         run: |
-          python -m pip install tox
+          python -m pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' tox
       - name: Run tests
         run: tox
 
@@ -137,7 +137,7 @@ jobs:
     - docs
     - test_cygwin
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Decide whether the needed jobs succeeded or failed
@@ -152,7 +152,7 @@ jobs:
         python:
         - 39
         platform:
-        - windows-latest
+        - windows-2022
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 75
     steps:
@@ -169,7 +169,7 @@ jobs:
             git,
       - name: Record the currently selected Python version
         id: python-install
-        # NOTE: This roughly emulates what `actions/setup-python@v4` provides
+        # NOTE: This roughly emulates what `MatteoH2O1999/setup-python@v4` provides
         # NOTE: except the action gets the version from the installation path
         # NOTE: on disk and we get it from runtime.
         run: |
@@ -183,7 +183,7 @@ jobs:
       - name: Create coverage report
         if: hashFiles('.coverage') != ''  # Rudimentary `file.exists()`
         run: |
-          python -m pip install coverage
+          python -m pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' coverage
           python -m coverage xml --ignore-errors
         shell: C:\cygwin\bin\env.exe CYGWIN_NOWINPATH=1 CHERE_INVOKING=1 C:\cygwin\bin\bash.exe -leo pipefail -o igncr {0}
       - name: Publish coverage
@@ -209,7 +209,7 @@ jobs:
     #    already tested via unit tests (or other tests not classified here as
     #    "integration")
     # With that in mind, the integration tests can run for a single setup
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 75
     steps:
       - uses: actions/checkout@v3
@@ -218,13 +218,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install build-essential gfortran libopenblas-dev
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: MatteoH2O1999/setup-python@v4
         with:
           # Use a release that is not very new but still have a long life:
           python-version: "3.8"
       - name: Install tox
         run: |
-          python -m pip install tox
+          python -m pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' tox
       - name: Run integration tests
         run: tox -e integration
 
@@ -234,17 +234,17 @@ jobs:
     needs:
     - check
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 75
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: MatteoH2O1999/setup-python@v4
         with:
           python-version: 3.11-dev
       - name: Install tox
         run: |
-          python -m pip install tox
+          python -m pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' tox
       - name: Release
         run: tox -e release
         env:

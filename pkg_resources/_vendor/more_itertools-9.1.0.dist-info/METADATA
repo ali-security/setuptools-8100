@@ -186,7 +186,7 @@ To get started, install the library with `pip <https://pip.pypa.io/en/stable/>`_
 
 .. code-block:: shell
 
-    pip install more-itertools
+    pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' more-itertools
 
 The recipes from the `itertools docs <https://docs.python.org/3/library/itertools.html#itertools-recipes>`_
 are included in the top-level package:

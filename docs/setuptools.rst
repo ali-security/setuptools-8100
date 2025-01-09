@@ -133,7 +133,7 @@ only a ``setuptools.setup()`` call.
 .. note::
 
     :pep:`517` doesn't support editable installs so this is currently
-    incompatible with ``pip install -e .``.
+    incompatible with ``pip install --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' -e .``.
 
 This means that you can have a Python project with all build configuration
 specified in ``setup.cfg``, without a ``setup.py`` file, if you **can rely
