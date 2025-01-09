@@ -41,16 +41,16 @@ LATEST, = Enum("v", "LATEST")
 # that `build-essential`, `gfortran` and `libopenblas-dev` are installed,
 # due to their relevance to the numerical/scientific programming ecosystem)
 EXAMPLES = [
-    ("pandas", LATEST),  # cython + custom build_ext
-    ("sphinx", LATEST),  # custom setup.py
-    ("pip", LATEST),  # just in case...
-    ("pytest", LATEST),  # uses setuptools_scm
-    ("mypy", LATEST),  # custom build_py + ext_modules
+    ("pandas", "1.5.0"),  # cython + custom build_ext
+    ("sphinx", "5.2.3"),  # custom setup.py
+    ("pip", "22.2.2"),  # just in case...
+    ("pytest", "7.1.3"),  # uses setuptools_scm
+    ("mypy", "0.982"),  # custom build_py + ext_modules
 
     # --- Popular packages: https://hugovk.github.io/top-pypi-packages/ ---
-    ("botocore", LATEST),
+    ("botocore", "1.27.90"),
     ("kiwisolver", "1.3.2"),  # build_ext, version pinned due to setup_requires
-    ("brotli", LATEST),  # not in the list but used by urllib3
+    ("brotli", "1.0.9"),  # not in the list but used by urllib3
 
     # When adding packages to this list, make sure they expose a `__version__`
     # attribute, or modify the tests below
